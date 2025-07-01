@@ -19,12 +19,14 @@ dependencies:
   json_annotation: ^4.9.0
 
 dev_dependencies:
+  bloc_test: ^10.0.0
   build_runner: ^2.5.4
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
   freezed: ^3.0.6
   json_serializable: ^6.8.0
+  mockito: ^5.4.6
 
 flutter:
 

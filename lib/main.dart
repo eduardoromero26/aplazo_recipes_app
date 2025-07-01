@@ -1,4 +1,4 @@
-import 'package:aplazo_recipes_app/presentation/screens/home_screen.dart';
+import 'package:aplazo_recipes_app/routes/router_generator.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      onGenerateRoute: RouteGenerator.generateRoute,
     );
   }
 }

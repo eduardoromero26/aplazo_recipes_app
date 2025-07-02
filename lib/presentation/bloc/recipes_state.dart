@@ -1,12 +1,9 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../domain/models/meal_model.dart';
-
-part 'recipes_state.freezed.dart';
+part of 'recipes_bloc.dart';
 
 @freezed
-class RecipesState with _$RecipesState {
-  factory RecipesState.initial() = _Initial;
-  factory RecipesState.loadingStarted() = _LoadingStarted;
-  factory RecipesState.loadedSuccess(MealsModel? meals) = _LoadedSuccess;
-  factory RecipesState.loadedFailed(String message) = _LoadedFailed;
+sealed class RecipesState with _$RecipesState {
+  const factory RecipesState.initial() = _Initial;
+  const factory RecipesState.loadingStarted() = _LoadingStarted;
+  const factory RecipesState.loadedSuccess(MealsModel? meals) = _LoadedSuccess;
+  const factory RecipesState.loadedFailed(String message) = _LoadedFailed;
 }

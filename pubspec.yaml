@@ -8,6 +8,7 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   equatable: ^2.0.7
@@ -16,7 +17,9 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_dotenv: ^5.2.1
   freezed_annotation: ^3.0.0
-  json_annotation: ^4.9.0
+  get_it: ^7.6.4
+  lottie: ^3.3.1
+  sliver_tools: ^0.2.12
 
 dev_dependencies:
   bloc_test: ^10.0.0
@@ -25,7 +28,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^3.0.6
-  json_serializable: ^6.8.0
   mockito: ^5.4.6
 
 flutter:

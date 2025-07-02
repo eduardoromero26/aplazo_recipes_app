@@ -1,8 +1,6 @@
 import 'package:aplazo_recipes_app/data/services/base_api.dart';
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart';
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
-import 'package:aplazo_recipes_app/presentation/bloc/recipes_event.dart';
-import 'package:aplazo_recipes_app/presentation/bloc/recipes_state.dart';
 import 'package:aplazo_recipes_app/utils/endpoints.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dio/dio.dart';

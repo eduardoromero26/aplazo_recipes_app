@@ -1,11 +1,14 @@
 import 'package:aplazo_recipes_app/data/services/base_api.dart';
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart';
 import 'package:aplazo_recipes_app/utils/endpoints.dart';
-import 'package:aplazo_recipes_app/presentation/bloc/recipes_event.dart';
-import 'package:aplazo_recipes_app/presentation/bloc/recipes_state.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'recipes_bloc.freezed.dart';
+part 'recipes_event.dart';
+part 'recipes_state.dart';
 
 class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
   MealsModel? mealList = const MealsModel();
@@ -26,7 +29,6 @@ class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
         emit(RecipesState.loadedFailed(e.toString()));
       }
     });
-
     on<ResetSearchControllerEvent>((event, emit) {
       searchFieldController.text = '';
     });

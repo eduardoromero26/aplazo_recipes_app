@@ -3,7 +3,7 @@ import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/lotties/empty_search_lottie_view.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/lotties/error_lottie_view.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/lotties/loading_lottie_view.dart';
-import 'package:aplazo_recipes_app/presentation/widgets/meals_bloc_builder.dart';
+import 'package:aplazo_recipes_app/presentation/widgets/meals_sliver_list.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/search_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,14 +25,32 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: CustomScrollView(
-          slivers: <Widget>[
-            const SearchTextField(),
-            BlocConsumer<RecipesBloc, RecipesState>(
-              listener: (BuildContext context, RecipesState state) {},
-              builder: (context, state) {
-                return switch (state) {
+      child: BlocConsumer<RecipesBloc, RecipesState>(
+        listener: (BuildContext context, RecipesState state) {},
+        builder: (context, state) {
+          return Scaffold(
+            body: CustomScrollView(
+              slivers: <Widget>[
+                SearchTextField(
+                  controller: context.read<RecipesBloc>().searchFieldController,
+                  onClearClicked: () {
+                    context.read<RecipesBloc>().searchFieldController.text = '';
+                    context.read<RecipesBloc>().add(
+                      SearchMealByNameEvent(
+                        name: context
+                            .read<RecipesBloc>()
+                            .searchFieldController
+                            .text,
+                      ),
+                    );
+                  },
+                  onSearchClicked: (String name) {
+                    context.read<RecipesBloc>().add(
+                      SearchMealByNameEvent(name: name),
+                    );
+                  },
+                ),
+                switch (state) {
                   RecipesState() when state == const RecipesState.initial() =>
                     const SliverToBoxAdapter(
                       child: Center(
@@ -55,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       if (meals != null &&
                           meals.meals != null &&
                           meals.meals!.isNotEmpty) {
-                        return MealsBlocBuilder();
+                        return MealsSliverList(meals: meals.meals);
                       } else {
                         return EmptySearchLottieView();
                       }
@@ -66,11 +84,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ) =>
                     const SliverToBoxAdapter(child: ErrorLottieView()),
                   _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
-                };
-              },
+                },
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

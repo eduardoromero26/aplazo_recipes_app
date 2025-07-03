@@ -1,6 +1,7 @@
 import 'package:aplazo_recipes_app/routes/router_generator.dart';
 import 'package:aplazo_recipes_app/core/dependency_injection.dart';
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
+import 'package:aplazo_recipes_app/styles/colors_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -28,7 +29,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Aplazo Recipes App',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: ColorsTheme.primaryColor,
+          ),
         ),
         onGenerateRoute: RouteGenerator.generateRoute,
       ),

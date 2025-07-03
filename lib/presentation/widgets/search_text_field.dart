@@ -1,3 +1,4 @@
+import 'package:aplazo_recipes_app/styles/colors_theme.dart';
 import 'package:aplazo_recipes_app/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
@@ -22,13 +23,24 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return SliverPinnedHeader(
       child: Container(
-        color: Colors.white,
-        padding: const EdgeInsets.all(16.0),
+        color: ColorsTheme.primaryColor,
+        padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
         child: TextField(
           controller: widget.controller,
           decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.white, width: 2.0),
+            ),
+            enabledBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.white, width: 2.0),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderSide: BorderSide(color: Colors.white, width: 2.0),
             ),
             hintText: 'Search for meals',
             hintStyle: TypographyTheme.fontMedium20Px,

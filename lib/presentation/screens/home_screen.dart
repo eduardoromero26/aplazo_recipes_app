@@ -29,6 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (BuildContext context, RecipesState state) {},
         builder: (context, state) {
           return Scaffold(
+            bottomNavigationBar: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite),
+                  label: 'Favorites',
+                ),
+              ],
+              currentIndex: 0,
+              selectedItemColor: Colors.amber[800],
+              onTap: (int index) {},
+            ),
             body: CustomScrollView(
               slivers: <Widget>[
                 SearchTextField(

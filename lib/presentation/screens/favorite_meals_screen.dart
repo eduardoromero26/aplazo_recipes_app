@@ -70,7 +70,7 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
                   ),
                 RecipesState()
                     when state == const RecipesState.loadingStarted() =>
-                  const LoadingLottieView(),
+                  SliverFillRemaining(child: const LoadingLottieView()),
                 RecipesState()
                     when state.runtimeType.toString().contains(
                       'LoadedSuccess',
@@ -89,14 +89,18 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
                         },
                       );
                     } else {
-                      return const EmptySearchLottieView();
+                      return SliverFillRemaining(
+                        child: const EmptySearchLottieView(),
+                      );
                     }
                   }(),
                 RecipesState()
                     when state.runtimeType.toString().contains(
                       'LoadedFailed',
                     ) =>
-                  const SliverToBoxAdapter(child: ErrorLottieView()),
+                  const SliverToBoxAdapter(
+                    child: SliverFillRemaining(child: ErrorLottieView()),
+                  ),
                 _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
               },
             ],

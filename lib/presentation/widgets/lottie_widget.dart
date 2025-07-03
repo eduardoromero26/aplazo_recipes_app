@@ -44,7 +44,7 @@ class LoadingLottieView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LottieWidget(
-      lottiePath: 'assets/lotties/loading_lottie.json',
+      lottiePath: 'assets/lotties/progress_lottie.json',
       message: 'Loading meals...',
     );
   }
@@ -56,7 +56,7 @@ class EmptySearchLottieView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LottieWidget(
-      lottiePath: 'assets/lotties/empty_search_lottie.json',
+      lottiePath: 'assets/lotties/not_found_lottie.json',
       message: 'No meals found',
     );
   }

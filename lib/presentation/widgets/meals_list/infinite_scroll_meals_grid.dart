@@ -1,5 +1,6 @@
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart';
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
+import 'package:aplazo_recipes_app/presentation/widgets/lottie_widget.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/meal_list_tile.dart';
 import 'package:aplazo_recipes_app/routes/route_names.dart';
 import 'package:flutter/material.dart';
@@ -47,60 +48,18 @@ class _InfiniteScrollMealsGridState extends State<InfiniteScrollMealsGrid> {
                 );
               },
             ),
-            firstPageErrorIndicatorBuilder: (context) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error, size: 64, color: Colors.red),
-                  const SizedBox(height: 16),
-                  Text(
-                    'Error loading meals',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => _pagingController.refresh(),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            ),
-            newPageErrorIndicatorBuilder: (context) => Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.error, size: 32, color: Colors.red),
-                  const SizedBox(height: 8),
-                  const Text('Error loading more meals'),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    onPressed: () => fetchNextPage(),
-                    child: const Text('Retry'),
-                  ),
-                ],
-              ),
-            ),
+            firstPageErrorIndicatorBuilder: (context) => ErrorLottieView(),
+            newPageErrorIndicatorBuilder: (context) => ErrorLottieView(),
             firstPageProgressIndicatorBuilder: (context) =>
-                const Center(child: CircularProgressIndicator()),
+                const LoadingLottieView(),
             newPageProgressIndicatorBuilder: (context) => const Center(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.symmetric(vertical: 20),
                 child: CircularProgressIndicator(),
               ),
             ),
-            noItemsFoundIndicatorBuilder: (context) => const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.restaurant, size: 64, color: Colors.grey),
-                  SizedBox(height: 16),
-                  Text(
-                    'No meals available',
-                    style: TextStyle(fontSize: 18, color: Colors.grey),
-                  ),
-                ],
-              ),
-            ),
+            noItemsFoundIndicatorBuilder: (context) =>
+                const EmptySearchLottieView(),
           ),
         ),
       ),

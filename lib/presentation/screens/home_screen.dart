@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   RecipesState()
                       when state == const RecipesState.loadingStarted() =>
-                    const LoadingLottieView(),
+                    SliverFillRemaining(child: const LoadingLottieView()),
                   RecipesState()
                       when state.runtimeType.toString().contains(
                         'LoadedSuccess',
@@ -84,14 +84,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           meals.meals!.isNotEmpty) {
                         return MealsSliverList(meals: meals.meals);
                       } else {
-                        return EmptySearchLottieView();
+                        return SliverFillRemaining(
+                          child: EmptySearchLottieView(),
+                        );
                       }
                     }(),
                   RecipesState()
                       when state.runtimeType.toString().contains(
                         'LoadedFailed',
                       ) =>
-                    const SliverToBoxAdapter(child: ErrorLottieView()),
+                    const SliverFillRemaining(child: ErrorLottieView()),
                   _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
                 },
               ],

@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<RecipesBloc>(),
       child: MaterialApp(
-        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        title: 'Aplazo Recipes App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),

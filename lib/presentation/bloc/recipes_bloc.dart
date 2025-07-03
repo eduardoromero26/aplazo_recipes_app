@@ -21,9 +21,9 @@ class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
 
   RecipesBloc(this._mealRepository) : super(RecipesState.initial()) {
     on<SearchMealByNameEvent>((event, emit) async {
+      isSearching = true;
       emit(RecipesState.loadingStarted());
       try {
-        isSearching = true;
         final mealsModel = await _mealRepository.searchMealsByName(event.name);
         mealList = mealsModel;
         mealList?.meals != null

@@ -54,7 +54,7 @@ class _InfiniteScrollMealsGridState extends State<InfiniteScrollMealsGrid> {
                 const LoadingLottieView(),
             newPageProgressIndicatorBuilder: (context) => const Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 20),
+                padding: EdgeInsets.symmetric(vertical: 40),
                 child: CircularProgressIndicator(),
               ),
             ),

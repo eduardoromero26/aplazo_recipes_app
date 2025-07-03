@@ -26,18 +26,27 @@ class MealRepositoryImpl implements MealRepository {
     try {
       const pageSize = 10;
       List<Meal> randomMeals = [];
-
-      for (int i = 0; i < pageSize; i++) {
+      Set<String> usedMealIds = {};
+      int attempts = 0;
+      const maxAttempts = 50;
+      while (randomMeals.length < pageSize && attempts < maxAttempts) {
         try {
           final response = await _baseApi.getFromApi(Endpoints.randomMeal);
           final mealsModel = MealsModel.fromJson(response.data);
 
           if (mealsModel.meals != null && mealsModel.meals!.isNotEmpty) {
-            randomMeals.add(mealsModel.meals!.first);
+            final meal = mealsModel.meals!.first;
+
+            if (!usedMealIds.contains(meal.idMeal)) {
+              usedMealIds.add(meal.idMeal);
+              randomMeals.add(meal);
+            }
           }
 
+          attempts++;
           await Future.delayed(const Duration(milliseconds: 100));
         } catch (e) {
+          attempts++;
           debugPrint('Error getting random meal: $e');
         }
       }

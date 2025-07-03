@@ -43,16 +43,7 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
       currentIndex: 1,
       child: BlocConsumer<RecipesBloc, RecipesState>(
         listener: (BuildContext context, RecipesState state) {
-          if (state.runtimeType.toString().contains('LoadedSuccess') ||
-              state.runtimeType.toString().contains('FavoritesUpdated')) {
-            final dynamic loadedState = state;
-            final favorites = loadedState.favorites as List<Meal>?;
-            if (favorites != null) {
-              setState(() {
-                favoriteMeals = List.from(favorites);
-              });
-            }
-          }
+          _updateFavorites();
         },
         builder: (context, state) {
           return CustomScrollView(

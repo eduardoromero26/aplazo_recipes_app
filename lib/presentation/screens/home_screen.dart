@@ -21,8 +21,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    context.read<RecipesBloc>().add(SearchMealByNameEvent(name: ''));
     super.initState();
+    context.read<RecipesBloc>().add(SearchMealByNameEvent(name: ''));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<RecipesBloc>().add(SearchMealByNameEvent(name: ''));
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    context.read<RecipesBloc>().searchFieldController.dispose();
   }
 
   @override

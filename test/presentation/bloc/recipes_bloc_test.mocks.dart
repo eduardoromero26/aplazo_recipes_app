@@ -5,8 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
 
-import 'package:aplazo_recipes_app/data/services/base_api.dart' as _i3;
-import 'package:dio/dio.dart' as _i2;
+import 'package:aplazo_recipes_app/domain/models/meal_model.dart' as _i2;
+import 'package:aplazo_recipes_app/domain/repositories/meal_repository.dart'
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -23,32 +24,65 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeDio_0 extends _i1.SmartFake implements _i2.Dio {
-  _FakeDio_0(Object parent, Invocation parentInvocation)
+class _FakeMealsModel_0 extends _i1.SmartFake implements _i2.MealsModel {
+  _FakeMealsModel_0(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [BaseApi].
+/// A class which mocks [MealRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBaseApi extends _i1.Mock implements _i3.BaseApi {
-  MockBaseApi() {
+class MockMealRepository extends _i1.Mock implements _i3.MealRepository {
+  MockMealRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.Dio get dio =>
+  _i4.Future<_i2.MealsModel> searchMealsByName(String? name) =>
       (super.noSuchMethod(
-            Invocation.getter(#dio),
-            returnValue: _FakeDio_0(this, Invocation.getter(#dio)),
+            Invocation.method(#searchMealsByName, [name]),
+            returnValue: _i4.Future<_i2.MealsModel>.value(
+              _FakeMealsModel_0(
+                this,
+                Invocation.method(#searchMealsByName, [name]),
+              ),
+            ),
           )
-          as _i2.Dio);
+          as _i4.Future<_i2.MealsModel>);
 
   @override
-  _i4.Future<dynamic> getFromApi(String? endpoint) =>
+  _i4.Future<List<_i2.Meal>> getMealsForPage(
+    int? pageKey,
+    String? searchQuery,
+  ) =>
       (super.noSuchMethod(
-            Invocation.method(#getFromApi, [endpoint]),
-            returnValue: _i4.Future<dynamic>.value(),
+            Invocation.method(#getMealsForPage, [pageKey, searchQuery]),
+            returnValue: _i4.Future<List<_i2.Meal>>.value(<_i2.Meal>[]),
           )
-          as _i4.Future<dynamic>);
+          as _i4.Future<List<_i2.Meal>>);
+
+  @override
+  _i4.Future<List<_i2.Meal>> getRandomMealsForPage(int? pageKey) =>
+      (super.noSuchMethod(
+            Invocation.method(#getRandomMealsForPage, [pageKey]),
+            returnValue: _i4.Future<List<_i2.Meal>>.value(<_i2.Meal>[]),
+          )
+          as _i4.Future<List<_i2.Meal>>);
+
+  @override
+  _i4.Future<List<_i2.Meal>> getMealsByCategory(
+    String? category,
+    int? pageKey,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#getMealsByCategory, [category, pageKey]),
+            returnValue: _i4.Future<List<_i2.Meal>>.value(<_i2.Meal>[]),
+          )
+          as _i4.Future<List<_i2.Meal>>);
+
+  @override
+  void clearSearchCache() => super.noSuchMethod(
+    Invocation.method(#clearSearchCache, []),
+    returnValueForMissingStub: null,
+  );
 }

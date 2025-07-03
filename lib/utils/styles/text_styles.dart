@@ -1,4 +1,4 @@
-import 'package:aplazo_recipes_app/styles/colors_theme.dart';
+import 'package:aplazo_recipes_app/utils/styles/colors_theme.dart';
 import 'package:flutter/material.dart';
 
 class TypographyTheme {

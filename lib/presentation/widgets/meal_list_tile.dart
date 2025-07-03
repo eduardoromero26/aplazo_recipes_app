@@ -1,5 +1,5 @@
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart';
-import 'package:aplazo_recipes_app/styles/text_styles.dart';
+import 'package:aplazo_recipes_app/utils/styles/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

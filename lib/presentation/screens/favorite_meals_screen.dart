@@ -1,12 +1,10 @@
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart';
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/layout_widget.dart';
-import 'package:aplazo_recipes_app/presentation/widgets/lotties/empty_search_lottie_view.dart';
-import 'package:aplazo_recipes_app/presentation/widgets/lotties/error_lottie_view.dart';
-import 'package:aplazo_recipes_app/presentation/widgets/lotties/loading_lottie_view.dart';
+import 'package:aplazo_recipes_app/presentation/widgets/lottie_widget.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/meal_list_tile.dart';
 import 'package:aplazo_recipes_app/routes/route_names.dart';
-import 'package:aplazo_recipes_app/styles/colors_theme.dart';
+import 'package:aplazo_recipes_app/utils/styles/colors_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,7 +43,6 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
       currentIndex: 1,
       child: BlocConsumer<RecipesBloc, RecipesState>(
         listener: (BuildContext context, RecipesState state) {
-          // Actualizar la lista local cuando el estado cambie
           if (state.runtimeType.toString().contains('LoadedSuccess') ||
               state.runtimeType.toString().contains('FavoritesUpdated')) {
             final dynamic loadedState = state;
@@ -60,7 +57,6 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
         builder: (context, state) {
           return CustomScrollView(
             slivers: <Widget>[
-              // Hero Header estético
               _HeroHeader(),
               switch (state) {
                 RecipesState() when state == const RecipesState.initial() =>
@@ -74,7 +70,7 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
                   ),
                 RecipesState()
                     when state == const RecipesState.loadingStarted() =>
-                  LoadingLottieView(message: 'Loading favorite meals...'),
+                  const LoadingLottieView(),
                 RecipesState()
                     when state.runtimeType.toString().contains(
                       'LoadedSuccess',
@@ -84,13 +80,11 @@ class _FavoriteMealsScreenState extends State<FavoriteMealsScreen> {
                       return _Content(
                         meals: favoriteMeals,
                         onMealTap: (meal) async {
-                          // Navegar y esperar a que regrese
                           await Navigator.pushNamed(
                             context,
                             RouteNames.details,
                             arguments: meal,
                           );
-                          // Recargar favoritos cuando regrese
                           _updateFavorites();
                         },
                       );
@@ -134,7 +128,6 @@ class _Content extends StatelessWidget {
               if (onMealTap != null) {
                 await onMealTap!(meals![index]);
               } else {
-                // Navegación por defecto
                 Navigator.pushNamed(
                   context,
                   RouteNames.details,
@@ -170,9 +163,7 @@ class _HeroHeader extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Patrón decorativo de fondo
             Positioned.fill(child: CustomPaint(painter: _PatternPainter())),
-            // Contenido principal
             Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -195,7 +186,6 @@ class _HeroHeader extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  // Subtítulo
                   const Text(
                     'Discover your saved culinary treasures',
                     style: TextStyle(
@@ -222,7 +212,6 @@ class _PatternPainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    // Dibujar círculos decorativos
     for (int i = 0; i < 5; i++) {
       final radius = (i + 1) * 20.0;
       canvas.drawCircle(
@@ -232,7 +221,6 @@ class _PatternPainter extends CustomPainter {
       );
     }
 
-    // Dibujar líneas decorativas
     for (int i = 0; i < 8; i++) {
       final y = (i * 25.0);
       canvas.drawLine(

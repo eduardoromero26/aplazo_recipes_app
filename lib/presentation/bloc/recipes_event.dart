@@ -4,7 +4,8 @@ abstract class RecipesEvent {}
 
 class SearchMealByNameEvent extends RecipesEvent {
   final String name;
-  SearchMealByNameEvent({required this.name});
+  final int? pageKey;
+  SearchMealByNameEvent({required this.name, this.pageKey});
 }
 
 class ResetSearchControllerEvent extends RecipesEvent {}
@@ -22,4 +23,9 @@ class AddMealToFavoritesEvent extends RecipesEvent {
 class RemoveMealFromFavoritesEvent extends RecipesEvent {
   final Meal meal;
   RemoveMealFromFavoritesEvent({required this.meal});
+}
+
+class GetRandomMealsEvent extends RecipesEvent {
+  final int? pageKey;
+  GetRandomMealsEvent({this.pageKey});
 }

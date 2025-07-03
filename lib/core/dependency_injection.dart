@@ -16,5 +16,7 @@ void setupDependencies() {
   );
 
   // BLoCs
-  getIt.registerFactory<RecipesBloc>(() => RecipesBloc(getIt<BaseApi>()));
+  getIt.registerFactory<RecipesBloc>(
+    () => RecipesBloc(getIt<MealRepository>()),
+  );
 }

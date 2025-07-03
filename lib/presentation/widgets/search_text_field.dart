@@ -1,5 +1,5 @@
-import 'package:aplazo_recipes_app/styles/colors_theme.dart';
-import 'package:aplazo_recipes_app/styles/text_styles.dart';
+import 'package:aplazo_recipes_app/utils/styles/colors_theme.dart';
+import 'package:aplazo_recipes_app/utils/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
@@ -41,15 +41,15 @@ class _SearchTextFieldState extends State<SearchTextField> {
             filled: true,
             fillColor: Colors.white,
             border: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
               borderSide: BorderSide(color: Colors.white, width: 2.0),
             ),
             enabledBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
               borderSide: BorderSide(color: Colors.white, width: 2.0),
             ),
             focusedBorder: const OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
               borderSide: BorderSide(color: Colors.white, width: 2.0),
             ),
             hintText: 'Search for meals',

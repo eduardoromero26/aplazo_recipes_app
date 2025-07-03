@@ -1,9 +1,9 @@
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart' show Meal;
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/layout_widget.dart';
-import 'package:aplazo_recipes_app/presentation/widgets/lotties/empty_search_lottie_view.dart';
+import 'package:aplazo_recipes_app/presentation/widgets/lottie_widget.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/sliver_app_bar_meal.dart';
-import 'package:aplazo_recipes_app/styles/text_styles.dart';
+import 'package:aplazo_recipes_app/utils/styles/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,19 +15,6 @@ class DetailsRecipeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<RecipesBloc, RecipesState>(
       builder: (context, state) {
-        // Determinar si el meal está en favoritos
-        final isFavorite = switch (state) {
-          RecipesState()
-              when state.runtimeType.toString().contains('LoadedSuccess') =>
-            () {
-              final favorites = context.watch<RecipesBloc>().favoriteMeals;
-              return favorites.any(
-                (meal) => meal.idMeal == selectedMeal.idMeal,
-              );
-            }(),
-          _ => false,
-        };
-
         return LayoutWidget(
           child: CustomScrollView(
             slivers: <Widget>[

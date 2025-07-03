@@ -1,7 +1,7 @@
 import 'package:aplazo_recipes_app/routes/router_generator.dart';
 import 'package:aplazo_recipes_app/core/dependency_injection.dart';
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
-import 'package:aplazo_recipes_app/styles/colors_theme.dart';
+import 'package:aplazo_recipes_app/utils/styles/colors_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,10 +9,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize dependencies
   setupDependencies();
 
-  // Load environment variables
   await dotenv.load(fileName: "assets/env/.env.dev");
 
   runApp(const MyApp());

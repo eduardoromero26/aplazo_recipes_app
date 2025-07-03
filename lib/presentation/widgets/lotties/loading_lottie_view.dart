@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class LoadingLottieView extends StatelessWidget {
-  const LoadingLottieView({super.key});
+  final String? message;
+  const LoadingLottieView({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,10 @@ class LoadingLottieView extends StatelessWidget {
             'assets/lotties/progress_lottie.json',
             width: MediaQuery.of(context).size.width * 0.5,
           ),
-          const Text('Loading meals...', style: TypographyTheme.fontSemi20Px),
+          Text(
+            message ?? 'Loading meals...',
+            style: TypographyTheme.fontSemi20Px,
+          ),
         ],
       ),
     );

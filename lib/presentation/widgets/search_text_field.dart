@@ -23,7 +23,17 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return SliverPinnedHeader(
       child: Container(
-        color: ColorsTheme.primaryColor,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              ColorsTheme.primaryColor,
+              ColorsTheme.primaryColor.withOpacity(0.8),
+              ColorsTheme.secondaryColor,
+            ],
+          ),
+        ),
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
         child: TextField(
           controller: widget.controller,

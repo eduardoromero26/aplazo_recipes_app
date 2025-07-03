@@ -15,7 +15,7 @@ class MealListTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         color: Colors.grey[200],
       ),
-      margin: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: ListTile(

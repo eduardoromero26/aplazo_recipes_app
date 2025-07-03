@@ -1,7 +1,7 @@
 part of 'recipes_bloc.dart';
 
 @freezed
-sealed class RecipesState with _$RecipesState {
+class RecipesState with _$RecipesState {
   const factory RecipesState.initial() = _Initial;
   const factory RecipesState.loadingStarted() = _LoadingStarted;
   const factory RecipesState.loadedSuccess(MealsModel? meals) = _LoadedSuccess;

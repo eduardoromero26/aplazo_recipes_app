@@ -1,5 +1,6 @@
 import 'package:aplazo_recipes_app/domain/models/meal_model.dart';
 import 'package:aplazo_recipes_app/presentation/bloc/recipes_bloc.dart';
+import 'package:aplazo_recipes_app/presentation/widgets/layout_widget.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/lotties/empty_search_lottie_view.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/lotties/error_lottie_view.dart';
 import 'package:aplazo_recipes_app/presentation/widgets/lotties/loading_lottie_view.dart';
@@ -24,81 +25,68 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return LayoutWidget(
+      currentIndex: 0,
       child: BlocConsumer<RecipesBloc, RecipesState>(
         listener: (BuildContext context, RecipesState state) {},
         builder: (context, state) {
-          return Scaffold(
-            bottomNavigationBar: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite),
-                  label: 'Favorites',
-                ),
-              ],
-              currentIndex: 0,
-              selectedItemColor: Colors.amber[800],
-              onTap: (int index) {},
-            ),
-            body: CustomScrollView(
-              slivers: <Widget>[
-                SearchTextField(
-                  controller: context.read<RecipesBloc>().searchFieldController,
-                  onClearClicked: () {
-                    context.read<RecipesBloc>().searchFieldController.text = '';
-                    context.read<RecipesBloc>().add(
-                      SearchMealByNameEvent(
-                        name: context
-                            .read<RecipesBloc>()
-                            .searchFieldController
-                            .text,
-                      ),
-                    );
-                  },
-                  onSearchClicked: (String name) {
-                    context.read<RecipesBloc>().add(
-                      SearchMealByNameEvent(name: name),
-                    );
-                  },
-                ),
-                switch (state) {
-                  RecipesState() when state == const RecipesState.initial() =>
-                    const SliverToBoxAdapter(
-                      child: Center(
-                        child: Text(
-                          'Search for your favorite recipes!',
-                          style: TextStyle(fontSize: 18),
-                        ),
+          return CustomScrollView(
+            slivers: <Widget>[
+              SearchTextField(
+                controller: context.read<RecipesBloc>().searchFieldController,
+                onClearClicked: () {
+                  context.read<RecipesBloc>().searchFieldController.text = '';
+                  context.read<RecipesBloc>().add(
+                    SearchMealByNameEvent(
+                      name: context
+                          .read<RecipesBloc>()
+                          .searchFieldController
+                          .text,
+                    ),
+                  );
+                },
+                onSearchClicked: (String name) {
+                  context.read<RecipesBloc>().add(
+                    SearchMealByNameEvent(name: name),
+                  );
+                },
+              ),
+              switch (state) {
+                RecipesState() when state == const RecipesState.initial() =>
+                  const SliverToBoxAdapter(
+                    child: Center(
+                      child: Text(
+                        'Search for your favorite recipes!',
+                        style: TextStyle(fontSize: 18),
                       ),
                     ),
-                  RecipesState()
-                      when state == const RecipesState.loadingStarted() =>
-                    LoadingLottieView(),
-                  RecipesState()
-                      when state.runtimeType.toString().contains(
-                        'LoadedSuccess',
-                      ) =>
-                    () {
-                      final dynamic loadedState = state;
-                      final meals = loadedState.meals as MealsModel?;
-                      if (meals != null &&
-                          meals.meals != null &&
-                          meals.meals!.isNotEmpty) {
-                        return MealsSliverList(meals: meals.meals);
-                      } else {
-                        return EmptySearchLottieView();
-                      }
-                    }(),
-                  RecipesState()
-                      when state.runtimeType.toString().contains(
-                        'LoadedFailed',
-                      ) =>
-                    const SliverToBoxAdapter(child: ErrorLottieView()),
-                  _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
-                },
-              ],
-            ),
+                  ),
+                RecipesState()
+                    when state == const RecipesState.loadingStarted() =>
+                  LoadingLottieView(),
+                RecipesState()
+                    when state.runtimeType.toString().contains(
+                      'LoadedSuccess',
+                    ) =>
+                  () {
+                    final dynamic loadedState = state;
+                    final meals = loadedState.meals as MealsModel?;
+                    if (meals != null &&
+                        meals.meals != null &&
+                        meals.meals!.isNotEmpty) {
+                      return MealsSliverList(meals: meals.meals);
+                    } else {
+                      return EmptySearchLottieView();
+                    }
+                  }(),
+                RecipesState()
+                    when state.runtimeType.toString().contains(
+                      'LoadedFailed',
+                    ) =>
+                  const SliverToBoxAdapter(child: ErrorLottieView()),
+                _ => const SliverToBoxAdapter(child: SizedBox.shrink()),
+              },
+            ],
           );
         },
       ),

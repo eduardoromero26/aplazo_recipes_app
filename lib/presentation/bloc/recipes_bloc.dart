@@ -13,6 +13,12 @@ part 'recipes_state.dart';
 class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
   MealsModel? mealList = const MealsModel();
   TextEditingController searchFieldController = TextEditingController(text: '');
+  List<Meal> favoriteMeals = [];
+
+  // Método helper para verificar si un meal es favorito
+  bool isMealFavorite(String mealId) {
+    return favoriteMeals.any((meal) => meal.idMeal == mealId);
+  }
 
   RecipesBloc(BaseApi baseApi) : super(RecipesState.initial()) {
     on<SearchMealByNameEvent>((event, emit) async {
@@ -31,6 +37,31 @@ class RecipesBloc extends Bloc<RecipesEvent, RecipesState> {
     });
     on<ResetSearchControllerEvent>((event, emit) {
       searchFieldController.text = '';
+    });
+    on<ToggleFavoriteMealEvent>((event, emit) {
+      final isFavorite = favoriteMeals.any(
+        (meal) => meal.idMeal == event.meal.idMeal,
+      );
+
+      if (isFavorite) {
+        favoriteMeals.removeWhere((meal) => meal.idMeal == event.meal.idMeal);
+      } else {
+        favoriteMeals.add(event.meal);
+      }
+
+      // Emitir nuevo estado con favoritos actualizados
+      emit(RecipesState.loadedSuccess(mealList));
+    });
+    on<AddMealToFavoritesEvent>((event, emit) {
+      // Evitar duplicados
+      if (!favoriteMeals.any((meal) => meal.idMeal == event.meal.idMeal)) {
+        favoriteMeals.add(event.meal);
+      }
+      emit(RecipesState.loadedSuccess(mealList));
+    });
+    on<RemoveMealFromFavoritesEvent>((event, emit) {
+      favoriteMeals.removeWhere((meal) => meal.idMeal == event.meal.idMeal);
+      emit(RecipesState.loadedSuccess(mealList));
     });
   }
 }
